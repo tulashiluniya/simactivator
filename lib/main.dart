@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sms/flutter_sms.dart';
+
 import 'package:simactivator/SimActivation.dart';
 //Start Point of App
 void main()=> runApp(MyApp()); 

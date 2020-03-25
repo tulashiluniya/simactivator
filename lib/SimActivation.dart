@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_sms/flutter_sms.dart';
 
 class SimActivation extends StatefulWidget {
   SimActivation({Key key}) : super(key: key);
@@ -10,6 +11,22 @@ class SimActivation extends StatefulWidget {
 
 class _SimActivationState extends State<SimActivation> {
   final GlobalKey<FormState> _formKeyValue = new GlobalKey<FormState>();
+ //sms message and receiver number
+
+List<String> _phone=["9988"]; 
+
+
+
+void _sendSMS(String _message, List<String> _phone) async {
+    try {
+      String _result =
+          await sendSMS(message: _message, recipients: _phone);
+      setState(() => _message = _result);
+    } catch (error) {
+      setState(() => _message = error.toString());
+    }
+  }
+ 
   //controlles
   final numberControll = TextEditingController();
   final dateControll = TextEditingController();
@@ -17,6 +34,7 @@ class _SimActivationState extends State<SimActivation> {
   //list of docs types
   var _docTypeList = ["Passport", "Citizenship", "License", "Voter ID"];
   var _currentSelectedDocType = "Passport";
+  var _docTypeValue="0"; 
 
   //List of Issue District
   var _issueDistrictList = ["Morang", "Jhapa"];
@@ -25,6 +43,8 @@ class _SimActivationState extends State<SimActivation> {
   //List of date types
   var _issueDateTypeList = ["Nepali-BS", "English-AD"];
   var _currentSelectedIssueDateType = "Nepali-BS";
+  var _issueDateTypeValue="N";
+
 
   //for changing focus
   final FocusNode _numberFocus = FocusNode();
@@ -74,7 +94,29 @@ class _SimActivationState extends State<SimActivation> {
                   value: dropdownString, child: Text(dropdownString));
             }).toList(),
             onChanged: (String newValueSelected) {
+              
               setState(() {
+               
+                  switch (newValueSelected) {
+                    case "Passport":
+                      this._docTypeValue="0";
+                       break;
+
+                      case "Citizenship":
+                      this._docTypeValue="1";
+                       break;
+                   case "License":
+                      this._docTypeValue="2";
+                       break;
+                   case "Voter ID":
+                      this._docTypeValue="12";
+                       break;
+                    
+                    default:
+                  }
+
+
+
                 this._currentSelectedDocType = newValueSelected;
               });
             },
@@ -137,6 +179,18 @@ class _SimActivationState extends State<SimActivation> {
             }).toList(),
             onChanged: (String newValueSelected) {
               setState(() {
+                switch (newValueSelected) {
+                  case "Nepali-BS":
+                    this._issueDateTypeValue="N"; 
+                                      
+                    break;
+                    case "English-AD":
+                    this._issueDateTypeValue="E"; 
+                    break; 
+                  default:
+                
+
+                }
                 this._currentSelectedIssueDateType = newValueSelected;
               });
             },
@@ -214,15 +268,15 @@ class _SimActivationState extends State<SimActivation> {
             ],
           )  
            */
+          
           SizedBox(height: 10.0),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-
               SizedBox(
                 width: 150.0,
-                              child: RaisedButton(
+                child: RaisedButton(
                   textColor: Colors.white,
                   padding: const EdgeInsets.all(15.0),
                   color: Color(0XFF6a1b9a),
@@ -233,14 +287,18 @@ class _SimActivationState extends State<SimActivation> {
                     decoration: BoxDecoration(),
                     child: Text("Active Sim", style: TextStyle(fontSize: 20)),
                   ),
-                  onPressed: () {},
+                  onPressed: (){_sendSMS(numberControll.text+"*"+_docTypeValue+"*"+docNumberControll.text+"*"+_currentSelectedIssueDistrict+"*"+dateControll.text+"*"+_issueDateTypeValue+"*", _phone);
+                  } 
+
+                  
+                   
+
+                  
                 ),
               ),
-
-
               SizedBox(
                 width: 150.0,
-                              child: RaisedButton(
+                child: RaisedButton(
                   textColor: Colors.white,
                   padding: const EdgeInsets.all(15.0),
                   color: Color(0XFF6a1b9a),
@@ -251,13 +309,17 @@ class _SimActivationState extends State<SimActivation> {
                     decoration: BoxDecoration(),
                     child: Text("Clear", style: TextStyle(fontSize: 20)),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      numberControll.clear();
+                      dateControll.clear();
+                      docNumberControll.clear();
+                    });
+                  },
                 ),
               ),
-
             ],
           ),
-
         ],
       ),
     );
