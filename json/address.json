@@ -1,0 +1,41 @@
+{
+    "zone":[
+        {
+            "id":1,
+            "name":"Mechi"
+        },
+
+        {
+            "id":2,
+            "name":"Koshi"
+        }
+       
+    ],
+
+    "district":[
+        {
+            "id":1,
+            "zone_id":1,
+            "name":"Jhapa"
+        },
+        
+        {
+            "id":2,
+            "zone_id":1,
+            "name":"Ilam"
+        },
+
+        {
+            "id":3,
+            "zone_id":2,
+            "name":"Morang"
+        },
+        {
+            "id":4,
+            "zone_id":2,
+            "name":"Sunsari"
+        }
+
+    ]
+    
+}
