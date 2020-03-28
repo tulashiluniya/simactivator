@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_sms/flutter_sms.dart';
-
 import 'DropDown_Model.dart';
 
 class SimActivation extends StatefulWidget {
@@ -18,9 +16,14 @@ class _SimActivationState extends State<SimActivation> {
 
   List zoneList = List();
   List districtList = List();
-  List tempList = List();
+  List placesList = List();
+
+  List tempDistrictList = List();
+  List tempPlaceList = List();
+
   String _zone;
   String _district;
+  String _place;
 
   Future<String> loadStatesProvincesFromFile() async {
     return await rootBundle.loadString('json/address.json');
@@ -35,6 +38,7 @@ class _SimActivationState extends State<SimActivation> {
     setState(() {
       zoneList = places.zone;
       districtList = places.district;
+      placesList = places.places;
     });
   }
 
@@ -60,7 +64,7 @@ class _SimActivationState extends State<SimActivation> {
   var _docTypeValue = "0";
 
   //List of Issue District
-  
+
   var _currentSelectedIssueDistrict = "Morang";
 
   //List of date types
@@ -94,7 +98,6 @@ class _SimActivationState extends State<SimActivation> {
                   hintText: "Type Mobile Number",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)))),
-              
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
                 LengthLimitingTextInputFormatter(10),
@@ -105,52 +108,10 @@ class _SimActivationState extends State<SimActivation> {
               onFieldSubmitted: (term) {
                 _fieldFocusChange(context, _numberFocus, _dateFocus);
               }),
-
           SizedBox(
-            height: 20.0,
+            height: 10.0,
           ),
 
-          //Select Document Type Drop Down
-          DropdownButtonFormField<String>(
-            decoration: InputDecoration(
-                labelText: "Select Document Type",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)))),
-            items: _docTypeList.map((String dropdownString) {
-              return DropdownMenuItem<String>(
-                  value: dropdownString, child: Text(dropdownString));
-            }).toList(),
-            onChanged: (String newValueSelected) {
-              setState(() {
-                switch (newValueSelected) {
-                  case "Passport":
-                    this._docTypeValue = "0";
-                    break;
-
-                  case "Citizenship":
-                    this._docTypeValue = "1";
-                    break;
-                  case "License":
-                    this._docTypeValue = "2";
-                    break;
-                  case "Voter ID":
-                    this._docTypeValue = "12";
-                    break;
-
-                  default:
-                }
-
-                this._currentSelectedDocType = newValueSelected;
-              });
-            },
-            value: _currentSelectedDocType,
-          ),
-
-          SizedBox(
-            height: 15.0,
-          ),
-
-          //Document Number Text Field
           TextFormField(
             controller: docNumberControll,
             decoration: InputDecoration(
@@ -167,148 +128,248 @@ class _SimActivationState extends State<SimActivation> {
           ),
 
           SizedBox(
-            height: 20.0,
+            height: 15.0,
           ),
 
-          // Document Issuing District  Drop Down
-          DropdownButtonFormField<String>(
-            decoration: InputDecoration(
-                labelText: "Select Doc Issues District ",
-                hintText: "Select",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)))),
-            items: districtList.map((item) {
-              return DropdownMenuItem<String>(
-                  value: item.name, 
-                  child: Text(item.name));
-            }).toList(),
-            onChanged: (String newValueSelected) {
-              setState(() {
-                this._currentSelectedIssueDistrict = newValueSelected;
-              });
-            },
-            value: _currentSelectedIssueDistrict,
+          //Select Document Type Drop Down
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Flexible(
+                flex: 2,
+                child: DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 5),
+                      labelText: "Document Type",
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0)))),
+                  items: _docTypeList.map((String dropdownString) {
+                    return DropdownMenuItem<String>(
+                        value: dropdownString, child: Text(dropdownString));
+                  }).toList(),
+                  onChanged: (String newValueSelected) {
+                    setState(() {
+                      switch (newValueSelected) {
+                        case "Passport":
+                          this._docTypeValue = "0";
+                          break;
+
+                        case "Citizenship":
+                          this._docTypeValue = "1";
+                          break;
+                        case "License":
+                          this._docTypeValue = "2";
+                          break;
+                        case "Voter ID":
+                          this._docTypeValue = "12";
+                          break;
+
+                        default:
+                      }
+
+                      this._currentSelectedDocType = newValueSelected;
+                    });
+                  },
+                  value: _currentSelectedDocType,
+                ),
+              ),
+              SizedBox(width: 5),
+
+              // Document Issuing District  Drop Down
+              Flexible(
+                flex: 2,
+                child: DropdownButtonFormField<String>(
+                  isExpanded: false,
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 5),
+                      labelText: "Issue District ",
+                      hintText: "Select",
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0)))),
+                  items: districtList.map((item) {
+                    return DropdownMenuItem<String>(
+                        value: item.name, child: Text(item.name));
+                  }).toList(),
+                  onChanged: (String newValueSelected) {
+                    setState(() {
+                      this._currentSelectedIssueDistrict = newValueSelected;
+                    });
+                  },
+                  value: _currentSelectedIssueDistrict,
+                ),
+              ),
+            ],
+          ),
+
+          //Document Number Text Field
+          SizedBox(
+            height: 10.0,
           ),
 
           SizedBox(height: 10.0),
 
           //  Date Type Drop Down
-          DropdownButtonFormField<String>(
-            decoration: InputDecoration(
-                labelText: "Select Date Type",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)))),
-            items: _issueDateTypeList.map((String dropdownIssueDate) {
-              return DropdownMenuItem<String>(
-                  value: dropdownIssueDate, child: Text(dropdownIssueDate));
-            }).toList(),
-            onChanged: (String newValueSelected) {
-              setState(() {
-                switch (newValueSelected) {
-                  case "Nepali-BS":
-                    this._issueDateTypeValue = "N";
-
-                    break;
-                  case "English-AD":
-                    this._issueDateTypeValue = "E";
-                    break;
-                  default:
-                }
-                this._currentSelectedIssueDateType = newValueSelected;
-              });
-            },
-            value: _currentSelectedIssueDateType,
-          ),
-
-          SizedBox(height: 10.0),
+          Row(
+            children: <Widget>[
 
           //Document Issue Date Text Field
-          TextFormField(
-            controller: dateControll,
-            decoration: InputDecoration(
-                labelText: "Document Issue Date",
-                hintText: "YYYYMMDD(20531011)",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)))),
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              LengthLimitingTextInputFormatter(8),
-              WhitelistingTextInputFormatter.digitsOnly,
-            ],
-            focusNode: _dateFocus,
+          Flexible(flex: 2,
+                      child: TextFormField(
+              controller: dateControll,
+              decoration: InputDecoration(
+                  labelText: "Doc Issue Date",
+                  hintText: "YYYYMMDD",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)))),
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                LengthLimitingTextInputFormatter(8),
+                WhitelistingTextInputFormatter.digitsOnly,
+              ],
+              focusNode: _dateFocus,
+            ),
           ),
 
+               SizedBox(width: 5,),
+
+              Flexible(
+                flex: 2,
+                              child: DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 5),
+                      labelText: "Date Type",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)))),
+                  items: _issueDateTypeList.map((String dropdownIssueDate) {
+                    return DropdownMenuItem<String>(
+                        value: dropdownIssueDate, child: Text(dropdownIssueDate));
+                  }).toList(),
+                  onChanged: (String newValueSelected) {
+                    setState(() {
+                      switch (newValueSelected) {
+                        case "Nepali-BS":
+                          this._issueDateTypeValue = "N";
+
+                          break;
+                        case "English-AD":
+                          this._issueDateTypeValue = "E";
+                          break;
+                        default:
+                      }
+                      this._currentSelectedIssueDateType = newValueSelected;
+                    });
+                  },
+                  value: _currentSelectedIssueDateType,
+                ),
+              ),
+            ],
+          ),
+
+       
           SizedBox(
-            child: Text("Parmanent Address"),
-            height: 25.0,
+            height: 10.0,
+          ),
+          Text("Parmanent Address"),
+          SizedBox(
+            height: 10.0,
           ),
 
           //Parmanent Address Drop down List
- 
-          Column(
-                     
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                //Dropdown Zone
-                DropdownButtonFormField(
-                  
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Flexible(
+                flex: 2,
+                child: DropdownButtonFormField(
                   decoration: InputDecoration(
-                    labelText: "Zone",
-                    hintText: "-Select-",
+                      contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 5),
+                      labelText: "Select Zone",
+                      hintText: "-Select-",
                       border: OutlineInputBorder(
-                        
-                        
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)))),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0)))),
                   items: zoneList.map((item) {
                     return DropdownMenuItem(
                       child: Text(item.name),
                       value: item.id.toString(),
                     );
                   }).toList(),
-
-
                   onChanged: (String newValueSelected) {
                     setState(() {
-                      _district = null; 
-                      _zone= newValueSelected; 
-                      tempList= districtList.where((x)=>x.zoneId.toString()==(_zone.toString())).toList();
-
-
+                      _district = null;
+                      _zone = newValueSelected;
+                      tempDistrictList = districtList
+                          .where(
+                              (x) => x.zoneId.toString() == (_zone.toString()))
+                          .toList();
                     });
                   },
                   value: _zone,
                 ),
-                SizedBox(
-                  height: 15.0,
-                ),
-
-
-               DropdownButtonFormField(
+              ),
+              SizedBox(
+                width: 10.0,
+              ),
+              Flexible(
+                flex: 2,
+                child: DropdownButtonFormField(
                   decoration: InputDecoration(
-                    labelText: "District",
-                    hintText: "-Select-",
+                      contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 5),
+                      labelText: " Select District",
+                      hintText: "-Select-",
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)))),
-
-
-                  items: tempList.map((item) {
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0)))),
+                  items: tempDistrictList.map((item) {
                     return DropdownMenuItem<String>(
                       value: item.id.toString(),
-                      child: Text(item.name),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(5.0, 5, 50, 5),
+                        child: Text(item.name),
+                      ),
                     );
                   }).toList(),
                   onChanged: (String newValueSelected) {
                     setState(() {
                       this._district = newValueSelected;
+                      tempPlaceList = placesList
+                          .where((x) =>
+                              x.districtId.toString() == (_district.toString()))
+                          .toList();
                     });
                   },
                   value: _district,
-                )
-              ],
-          
+                ),
+              ),
+            ],
           ),
-
           SizedBox(height: 10.0),
+          DropdownButtonFormField(
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 5),
+                labelText: "Select Place",
+                hintText: "-Select-",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)))),
+            items: tempPlaceList.map((item) {
+              return DropdownMenuItem<String>(
+                value: item.id.toString(),
+                child: Text(item.name),
+              );
+            }).toList(),
+            onChanged: (String newValueSelected) {
+              setState(() {
+                this._place = newValueSelected;
+              });
+            },
+            value: _place,
+          ),
+          SizedBox(
+            height: 15.0,
+          ),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

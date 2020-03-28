@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:simactivator/SimActivation.dart';
+
 //Start Point of App
-void main()=> runApp(MyApp()); 
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
@@ -10,13 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //returns Material Design for app
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-     
-     theme: ThemeData(
-       primaryColor:  Color(0XFF6a1b9a), 
-
-     ),
+      theme: ThemeData(
+        primaryColor: Color(0XFF6a1b9a),
+      ),
       home: HomePage(),
     );
   }
@@ -30,14 +28,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-  return Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: Text("Sim Activator App"),
-
+          title: Text("Ncell Sim Activator"),
         ),
-        //body of app 
-        body:  SimActivation()
-
-      );
+        //body of app
+        body: SimActivation());
   }
 }

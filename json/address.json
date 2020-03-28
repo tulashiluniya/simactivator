@@ -36,6 +36,34 @@
             "name":"Sunsari"
         }
 
+    ],
+
+    "places":[
+        {
+            "id":1,
+            "district_id":1,
+            "name":"Damak"
+        },
+        
+        {
+            "id":2,
+            "district_id":2,
+            "name":"Ilam"
+        },
+
+        {
+            "id":3,
+            "district_id":3,
+            "name":"Biratnagar"
+        },
+        {
+            "id":4,
+            "district_id":3,
+            "name":"Pathari"
+        }
+
     ]
+
+    
     
 }
