@@ -1,69 +1,56 @@
 {
-    "zone":[
+    "zone": [
         {
-            "id":1,
-            "name":"Mechi"
+            "id": 1,
+            "name": "Mechi"
         },
-
         {
-            "id":2,
-            "name":"Koshi"
+            "id": 2,
+            "name": "Koshi"
         }
-       
     ],
-
-    "district":[
+    "district": [
         {
-            "id":1,
-            "zone_id":1,
-            "name":"Jhapa"
-        },
-        
-        {
-            "id":2,
-            "zone_id":1,
-            "name":"Ilam"
-        },
-
-        {
-            "id":3,
-            "zone_id":2,
-            "name":"Morang"
+            "id": 1,
+            "zone_id": 1,
+            "name": "Jhapa"
         },
         {
-            "id":4,
-            "zone_id":2,
-            "name":"Sunsari"
+            "id": 2,
+            "zone_id": 1,
+            "name": "Ilam"
+        },
+        {
+            "id": 3,
+            "zone_id": 2,
+            "name": "Morang"
+        },
+        {
+            "id": 4,
+            "zone_id": 2,
+            "name": "Sunsari"
         }
-
     ],
-
-    "places":[
+    "places": [
         {
-            "id":1,
-            "district_id":1,
-            "name":"Damak"
-        },
-        
-        {
-            "id":2,
-            "district_id":2,
-            "name":"Ilam"
-        },
-
-        {
-            "id":3,
-            "district_id":3,
-            "name":"Biratnagar"
+            "id": 1,
+            "district_id": 1,
+            "name": "Damak"
         },
         {
-            "id":4,
-            "district_id":3,
-            "name":"Pathari"
+            "id": 2,
+            "district_id": 2,
+            "name": "Ilam"
+        },
+        {
+            "id": 3,
+            "district_id": 3,
+            "name": "Biratnagar"
+        },
+        {
+            "id": 4,
+            "district_id": 3,
+            "name": "Pathari"
         }
-
     ]
-
-    
-    
 }

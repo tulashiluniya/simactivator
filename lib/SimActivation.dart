@@ -13,11 +13,10 @@ class SimActivation extends StatefulWidget {
 
 class _SimActivationState extends State<SimActivation> {
   final GlobalKey<FormState> _formKeyValue = new GlobalKey<FormState>();
-
+//Parmanent Address Dropdown List
   List zoneList = List();
   List districtList = List();
   List placesList = List();
-
   List tempDistrictList = List();
   List tempPlaceList = List();
 
@@ -60,16 +59,16 @@ class _SimActivationState extends State<SimActivation> {
   final docNumberControll = TextEditingController();
   //list of docs types
   var _docTypeList = ["Passport", "Citizenship", "License", "Voter ID"];
-  var _currentSelectedDocType = "Passport";
+  var _currentSelectedDocType ;
   var _docTypeValue = "0";
 
   //List of Issue District
 
-  var _currentSelectedIssueDistrict = "Morang";
+  var _currentSelectedIssueDistrict;
 
   //List of date types
   var _issueDateTypeList = ["Nepali-BS", "English-AD"];
-  var _currentSelectedIssueDateType = "Nepali-BS";
+  var _currentSelectedIssueDateType ;
   var _issueDateTypeValue = "N";
 
   //for changing focus
@@ -92,6 +91,8 @@ class _SimActivationState extends State<SimActivation> {
         children: <Widget>[
           //Mobile Number Text Field
           TextFormField(
+            
+            
               controller: numberControll,
               decoration: InputDecoration(
                   labelText: "Mobile Number",
@@ -119,8 +120,7 @@ class _SimActivationState extends State<SimActivation> {
                 hintText: "Type Document Number",
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)))),
-            autofocus: true,
-            keyboardType: TextInputType.number,
+              keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               WhitelistingTextInputFormatter.digitsOnly,
             ],
@@ -138,9 +138,11 @@ class _SimActivationState extends State<SimActivation> {
               Flexible(
                 flex: 2,
                 child: DropdownButtonFormField<String>(
+                  
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 5),
                       labelText: "Document Type",
+                      hintText: "Select",
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(10.0)))),
@@ -213,38 +215,43 @@ class _SimActivationState extends State<SimActivation> {
           //  Date Type Drop Down
           Row(
             children: <Widget>[
+              //Document Issue Date Text Field
+              Flexible(
+                flex: 2,
+                child: TextFormField(
+                  controller: dateControll,
+                  decoration: InputDecoration(
+                      labelText: "Doc Issue Date",
+                      hintText: "YYYYMMDD",
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0)))),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    LengthLimitingTextInputFormatter(8),
+                    WhitelistingTextInputFormatter.digitsOnly,
+                  ],
+                  focusNode: _dateFocus,
+                ),
+              ),
 
-          //Document Issue Date Text Field
-          Flexible(flex: 2,
-                      child: TextFormField(
-              controller: dateControll,
-              decoration: InputDecoration(
-                  labelText: "Doc Issue Date",
-                  hintText: "YYYYMMDD",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)))),
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                LengthLimitingTextInputFormatter(8),
-                WhitelistingTextInputFormatter.digitsOnly,
-              ],
-              focusNode: _dateFocus,
-            ),
-          ),
-
-               SizedBox(width: 5,),
+              SizedBox(
+                width: 5,
+              ),
 
               Flexible(
                 flex: 2,
-                              child: DropdownButtonFormField<String>(
+                child: DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 5),
                       labelText: "Date Type",
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)))),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0)))),
                   items: _issueDateTypeList.map((String dropdownIssueDate) {
                     return DropdownMenuItem<String>(
-                        value: dropdownIssueDate, child: Text(dropdownIssueDate));
+                        value: dropdownIssueDate,
+                        child: Text(dropdownIssueDate));
                   }).toList(),
                   onChanged: (String newValueSelected) {
                     setState(() {
@@ -267,7 +274,6 @@ class _SimActivationState extends State<SimActivation> {
             ],
           ),
 
-       
           SizedBox(
             height: 10.0,
           ),
@@ -356,7 +362,7 @@ class _SimActivationState extends State<SimActivation> {
                     borderRadius: BorderRadius.all(Radius.circular(10.0)))),
             items: tempPlaceList.map((item) {
               return DropdownMenuItem<String>(
-                value: item.id.toString(),
+                value: item.name,
                 child: Text(item.name),
               );
             }).toList(),
@@ -400,7 +406,7 @@ class _SimActivationState extends State<SimActivation> {
                               dateControll.text +
                               "*" +
                               _issueDateTypeValue +
-                              "*",
+                              "*"+_place,
                           _phone);
                     }),
               ),
