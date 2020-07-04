@@ -7,7 +7,58 @@
         {
             "id": 2,
             "name": "Koshi"
+        },
+        {
+            "id": 3,
+            "name": "Sagarmatha"
+        },
+        {
+            "id": 4,
+            "name": "Janakpur"
+        },
+        {
+            "id": 5,
+            "name": "Bagmati"
+        },
+        {
+            "id": 6,
+            "name": "Narayani"
+        },
+        {
+            "id": 7,
+            "name": "Gandaki"
+        },
+        {
+            "id": 8,
+            "name": "Lumbini"
+        },
+        {
+            "id": 9,
+            "name": "Dhaulagiri"
+        },
+        {
+            "id": 10,
+            "name": "Rapti"
+        },
+        {
+            "id": 11,
+            "name": "Karnali"
+        },
+        {
+            "id": 12,
+            "name": "Bheri"
+        },
+        {
+            "id": 13,
+            "name": "Seti"
+        },
+        {
+            "id": 14,
+            "name": "Mahakali"
         }
+
+        
+
     ],
     "district": [
         {
@@ -22,14 +73,373 @@
         },
         {
             "id": 3,
+            "zone_id": 1,
+            "name": "Panchthar"
+        },
+        { 
+            "id": 4,
+            "zone_id": 1,
+            "name": "Taplejung"
+        },
+
+        {
+            "id": 5,
+            "zone_id": 2,
+            "name": "Bhojpur"
+        },
+        {
+            "id": 6,
+            "zone_id": 2,
+            "name": "Dhankuta"
+        },
+        {
+            "id": 7,
             "zone_id": 2,
             "name": "Morang"
         },
         {
-            "id": 4,
+            "id": 8,
+            "zone_id": 2,
+            "name": "Sankhuwasava"
+        },
+        {
+            "id": 9,
             "zone_id": 2,
             "name": "Sunsari"
+        },
+        {
+            "id": 10,
+            "zone_id": 2,
+            "name": "Terhathum"
+        },
+        {
+            "id": 11,
+            "zone_id": 3,
+            "name": "Khotang"
+        },
+        {
+            "id": 12,
+            "zone_id": 3,
+            "name": "Okhaldhunga"
+        },
+        {
+            "id": 13,
+            "zone_id": 3,
+            "name": "Saptari"
+        },
+        {
+            "id": 14,
+            "zone_id": 3,
+            "name": "Siraha"
+        },
+        {
+            "id": 15,
+            "zone_id": 3,
+            "name": "Solukhumbu"
+        },
+        {
+            "id": 16,
+            "zone_id": 3,
+            "name": "Udayapur"
+        },
+        {
+            "id": 17,
+            "zone_id": 4,
+            "name": "Dhanusha"
+        },
+        {
+            "id": 18,
+            "zone_id": 4,
+            "name": "Dolakha"
+        },
+        {
+            "id": 19,
+            "zone_id": 4,
+            "name": "mahottari"
+        },
+        {
+            "id": 20,
+            "zone_id": 4,
+            "name": "Ramechhap"
+        },
+        {
+            "id": 21,
+            "zone_id": 4,
+            "name": "Sarlahi"
+        },
+        {
+            "id": 22,
+            "zone_id": 4,
+            "name": "Sindhuli"
+        },
+       
+        {
+            "id": 23,
+            "zone_id": 5,
+            "name": "Bhaktapur"
+        },
+        {
+            "id": 24,
+            "zone_id": 5,
+            "name": "Dhading"
+        },
+        {
+            "id": 25,
+            "zone_id": 5,
+            "name": "Kathmandu"
+        },
+        {
+            "id": 26,
+            "zone_id": 5,
+            "name": "Kavrepalan Chowk"
+        },
+        {
+            "id": 27,
+            "zone_id": 5,
+            "name": "Lalitpur"
+        },
+        {
+            "id": 28,
+            "zone_id": 5,
+            "name": "Nuwakot"
+        },
+        {
+            "id": 29,
+            "zone_id": 5,
+            "name": "Rasuwa"
+        },
+        {
+            "id": 30,
+            "zone_id": 5,
+            "name": "Sindhupalchowk"
+        },
+        {
+            "id": 31,
+            "zone_id": 6,
+            "name": "Bara"
+        },
+        {
+            "id": 32,
+            "zone_id": 6,
+            "name": "Chitwan"
+        },
+        {
+            "id": 33,
+            "zone_id": 6,
+            "name": "Makwanpur"
+        },
+        {
+            "id": 34,
+            "zone_id": 6,
+            "name": "Parsa"
+        },
+        {
+            "id": 35,
+            "zone_id": 6,
+            "name": "Rautahat"
+        },
+        {
+            "id": 36,
+            "zone_id": 7,
+            "name": "Gorkha"
+        },
+        {
+            "id": 37,
+            "zone_id": 7,
+            "name": "Kaski"
+        },
+        {
+            "id": 38,
+            "zone_id": 7,
+            "name": "Lamjung"
+        },
+        {
+            "id": 39,
+            "zone_id": 7,
+            "name": "Manang"
+        },
+        {
+            "id": 40,
+            "zone_id": 7,
+            "name": "Syangja"
+        },
+        {
+            "id": 41,
+            "zone_id": 7,
+            "name": "Tanahun"
+        },
+        {
+            "id": 42,
+            "zone_id": 8,
+            "name": "Arghakanchi"
+        },
+        {
+            "id": 43,
+            "zone_id": 8,
+            "name": "Gulmi"
+        },
+        {
+            "id": 44,
+            "zone_id": 8,
+            "name": "Kapilvastu"
+        },
+        {
+            "id": 45,
+            "zone_id": 8,
+            "name": "Nawalparasi"
+        },
+        {
+            "id": 46,
+            "zone_id": 8,
+            "name": "Palpa"
+        },
+        {
+            "id": 47,
+            "zone_id": 8,
+            "name": "Rupandehi"
+        },
+        {
+            "id": 48,
+            "zone_id": 9,
+            "name": "Baglung"
+        },
+        {
+            "id": 49,
+            "zone_id": 9,
+            "name": "Mustang"
+        },
+        {
+            "id": 50,
+            "zone_id": 9,
+            "name": "Myagdi"
+        },
+        {
+            "id": 51,
+            "zone_id": 9,
+            "name": "Parbat"
+        },
+        {
+            "id": 52,
+            "zone_id": 10,
+            "name": "Dang"
+        },
+        {
+            "id": 53,
+            "zone_id": 10,
+            "name": "Pyuthan"
+        },
+        {
+            "id": 54,
+            "zone_id": 10,
+            "name": "Rolpa"
+        },
+        {
+            "id": 55,
+            "zone_id": 10,
+            "name": "Rukum"
+        },
+        {
+            "id": 56,
+            "zone_id": 10,
+            "name": "Salyan"
+        },
+        {
+            "id": 57,
+            "zone_id": 11,
+            "name": "Dolpa"
+        },
+        {
+            "id": 58,
+            "zone_id": 11,
+            "name": "Humla"
+        },
+        {
+            "id": 59,
+            "zone_id": 11,
+            "name": "Jumla"
+        },
+        {
+            "id": 60,
+            "zone_id": 11,
+            "name": "Kalikot"
+        },
+        {
+            "id": 61,
+            "zone_id": 11,
+            "name": "Mugu"
+        },
+        {
+            "id": 62,
+            "zone_id": 12,
+            "name": "Banke"
+        },
+        {
+            "id": 63,
+            "zone_id": 12,
+            "name": "Bardiya"
+        },
+        {
+            "id": 64,
+            "zone_id": 12,
+            "name": "Dailekh"
+        },
+        {
+            "id": 65,
+            "zone_id": 12,
+            "name": "Jajgarkot"
+        },
+        {
+            "id": 66,
+            "zone_id": 12,
+            "name": "Surkhet"
+        },
+        {
+            "id": 67,
+            "zone_id": 13,
+            "name": "Achham"
+        },
+        {
+            "id": 68,
+            "zone_id": 13,
+            "name": "Bajhang"
+        },
+        {
+            "id": 69,
+            "zone_id": 13,
+            "name": "Bajura"
+        },
+        {
+            "id": 70,
+            "zone_id": 13,
+            "name": "Doti"
+        },
+        {
+            "id": 71,
+            "zone_id": 13,
+            "name": "Kailali"
+        },
+        {
+            "id": 72,
+            "zone_id": 14,
+            "name": "Baitadi"
+        },
+        {
+            "id": 73,
+            "zone_id": 14,
+            "name": "Dadeldhura"
+        },
+        {
+            "id": 74,
+            "zone_id": 14,
+            "name": "Darchula"
+        },
+        {
+            "id": 75,
+            "zone_id": 14,
+            "name": "Kanchanpur"
         }
+        
+
     ],
     "places": [
         {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simactivator/SimActivation.dart';
+import 'package:simactivator/LandingPage.dart';
 
 //Start Point of App
 void main() => runApp(MyApp());
@@ -30,9 +30,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Ncell Sim Activator"),
+          title: Text("NTC, Ncell & Other Services"),
+          actions: <Widget>[],
         ),
         //body of app
-        body: SimActivation());
+        body: LandingPage());
   }
 }
